@@ -1,0 +1,41 @@
+<header>
+    <div class="container" fxLayout="row" fxLayoutAlign="start center">
+        <h2>Football</h2>
+    </div>
+</header>
+
+<div class="loader">
+    <mat-progress-bar mode="query" *ngIf="loaderService.loading$ | async"></mat-progress-bar>
+</div>
+
+<div class="content">
+    <div class="container">
+        <form [formGroup]="searchForm" (ngSubmit)="search()" fxLayout="row wrap" fxLayoutAlign="start center">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic" fxFlex>
+                <mat-label>Filter by Competition</mat-label>
+                <mat-select formControlName="competition" (selectionChange)="competitionSelected()">
+                    <mat-option *ngFor="let competition of competitions" [value]="competition['id']">
+                        <div class="comp-option" fxLayout="row" fxLayoutAlign="start center">
+                            <img [src]="competition['emblem']" loading="lazy"> 
+                            <p>{{competition['name']}}</p>
+                        </div>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" subscriptSizing="dynamic" fxFlex>
+                <mat-label>Filter by Match Day</mat-label>
+                <!-- (selectionChange)="search()" -->
+                <mat-select formControlName="matchDay">
+                    <mat-option *ngFor="let matchDay of matchDays" [value]="matchDay">
+                        {{matchDay}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" type="submit" [disabled]="!searchForm.valid">Submit</button>
+        </form>
+
+        <app-match-table [dates]="dates" [dateBasedGroupedMatches]="dateBasedGroupedMatches"
+            [selectedCompetition]="selectedCompetition" [selectedMatchday]="selectedMatchday" />
+    </div>
+</div>

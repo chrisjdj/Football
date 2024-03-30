@@ -1,0 +1,31 @@
+<div class="wrapper" fxLayout="column" *ngIf="dates?.length">
+    <div class="heading" fxLayout="column">
+        <h5>Showing results for</h5>
+        <h2> {{selectedCompetition}} > Matchday {{selectedMatchday}}</h2>
+    </div>
+
+    <div class="details" *ngFor="let date of dates" fxLayout="column">
+        <time>{{date | date: ' EEEE, d MMMM y'}}</time>
+
+        <div class="match" *ngFor="let match of dateBasedGroupedMatches[date]" fxLayout="row" fxLayoutAlign="center center">
+            <div class="team" fxLayout="row" fxLayoutAlign="end center" fxFlex>
+                <p>{{match['homeTeam']['shortName'] || 'TBA'}}</p>
+                <img [src]="match['homeTeam']['crest']" loading="lazy">
+            </div>
+
+            <div class="score" fxLayout="row" fxLayoutAlign="center center">
+                <ng-container *ngIf="match['score']['winner']; else showStatus">
+                    {{match['score']['fullTime']['home']}} - {{match['score']['fullTime']['away']}}
+                </ng-container>
+                <ng-template #showStatus>
+                    {{match['status']}}
+                </ng-template>
+            </div>
+
+            <div class="team" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+                <img [src]="match['awayTeam']['crest']" loading="lazy">
+                <p>{{match['awayTeam']['shortName'] || 'TBA'}}</p>
+            </div>
+        </div>
+    </div>
+</div>

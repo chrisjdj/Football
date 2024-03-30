@@ -1,0 +1,15 @@
+@use 'reset';
+@use 'combined' as *;
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.container {
+    min-width: auto;
+    max-width: 1240px;
+    padding: 0 clamp-gen(10px, 15px);
+    margin: 0 auto;
+    box-sizing: border-box;
+}
