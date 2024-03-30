@@ -1,5 +1,5 @@
 # Football
-A website which shows match data based on the Competition and Match Day, utilizing the data from football-data.org. (See it in action below)
+A responsive website which shows match data based on the Competition and Match Day, utilizing the data from football-data.org. (See it in action below)
 
 ## Steps to run the project locally
 0. Generate a token from [https://www.football-data.org/](https://www.football-data.org/) and replace it at 'YOUR-TOKEN-HERE' in the api.interceptor.ts
